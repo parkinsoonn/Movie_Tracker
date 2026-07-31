@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CINEPHILE - Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@600;700;800&amp;family=Inter:wght@400&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#c8c6c6",
+                        "surface-dim": "#131313",
+                        "outline-variant": "#4d4732",
+                        "tertiary-container": "#dcd9d9",
+                        "background": "#131313",
+                        "on-primary-fixed-variant": "#544600",
+                        "on-error": "#690005",
+                        "surface-variant": "#353535",
+                        "surface-container-highest": "#353535",
+                        "surface-bright": "#393939",
+                        "outline": "#999077",
+                        "on-background": "#e5e2e1",
+                        "secondary-container": "#454747",
+                        "on-primary": "#3a3000",
+                        "error": "#ffb4ab",
+                        "on-primary-fixed": "#221b00",
+                        "inverse-on-surface": "#303030",
+                        "on-secondary": "#2f3131",
+                        "inverse-surface": "#e5e2e1",
+                        "surface-container-lowest": "#0e0e0e",
+                        "secondary": "#c6c6c7",
+                        "on-surface": "#e5e2e1",
+                        "on-secondary-fixed": "#1a1c1c",
+                        "primary-container": "#ffd700",
+                        "surface-container": "#202020",
+                        "on-tertiary-container": "#5f5f5f",
+                        "surface-container-high": "#2a2a2a",
+                        "secondary-fixed": "#e2e2e2",
+                        "on-primary-container": "#705e00",
+                        "error-container": "#93000a",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#1b1c1c",
+                        "surface-container-low": "#1b1b1c",
+                        "secondary-fixed-dim": "#c6c6c7",
+                        "on-tertiary": "#303030",
+                        "surface": "#131313",
+                        "tertiary": "#f8f6f5",
+                        "tertiary-fixed": "#e4e2e1",
+                        "on-secondary-container": "#b4b5b5",
+                        "primary-fixed-dim": "#e9c400",
+                        "primary-fixed": "#ffe16d",
+                        "surface-tint": "#e9c400",
+                        "on-tertiary-fixed-variant": "#474747",
+                        "inverse-primary": "#705d00",
+                        "primary": "#fff6df",
+                        "on-surface-variant": "#d0c6ab",
+                        "on-secondary-fixed-variant": "#454747"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "12px",
+                        "stack-md": "24px",
+                        "stack-lg": "40px",
+                        "gutter": "16px",
+                        "container-padding": "24px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["JetBrains Mono"],
+                        "headline-lg": ["Be Vietnam Pro"],
+                        "display-lg": ["Be Vietnam Pro"],
+                        "body-md": ["Inter"],
+                        "label-md": ["JetBrains Mono"],
+                        "headline-md": ["Be Vietnam Pro"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Be Vietnam Pro"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #1E1E1E; /* Level 0 Background */
+            color: #e5e2e1;
+        }
+        .movie-card-glow:hover {
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.15);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-24 md:pb-0">
+<!-- Navigation Drawer (Desktop) -->
+<nav class="hidden md:flex flex-col h-full py-8 bg-surface-container-high h-full w-80 rounded-r-xl shadow-2xl shadow-black fixed left-0 top-0 z-40">
+<div class="px-6 mb-8 flex items-center gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-variant flex items-center justify-center">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="A cinematic, high-contrast, moody portrait of a cinephile user avatar. Dark background, single light source casting dramatic shadows. Minimalist, premium aesthetic, suitable for a dark-mode luxury app profile picture. Sharp focus, professional photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAh-uVJt7LIJpau-Mp-0DOYbaURQgEfaB-wAqN4Sl0Ad-dXJvwjnY73wO3FOfEElNMdj4nY6hVIfI_XA9KzgvHknulwrGw3nKZAzTbyjACRG_k5L9QrYy_V6RM9uQb_L9trC19Ws6NVuftHkSA2IjugSYYFlKPrcjvOvElOe_yREMqSp6Vwc5PntcBPryrd55KFscM4RBzDQOLGQvKcQ58dI_6vEYOwOPBunxPN6PVmbwXwcsAh1DYoeFQQ7IxvOaujpu7uKoweTEEj"/>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-primary">Alex Moviebuff</h2>
+<p class="font-body-md text-body-md text-primary/60">Pro Member</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">1,240 Films Tracked</p>
+</div>
+</div>
+<div class="flex flex-col gap-2 mt-4">
+<a class="flex items-center gap-4 bg-primary/10 text-primary border-l-4 border-primary px-6 py-4 transition-all duration-200 ease-in-out hover:bg-white/5" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-body-md text-body-md">Home</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant px-6 py-4 transition-all duration-200 ease-in-out hover:bg-white/5 hover:text-primary" href="#">
+<span class="material-symbols-outlined">category</span>
+<span class="font-body-md text-body-md">Genres</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant px-6 py-4 transition-all duration-200 ease-in-out hover:bg-white/5 hover:text-primary" href="#">
+<span class="material-symbols-outlined">star</span>
+<span class="font-body-md text-body-md">Top Rated</span>
+</a>
+<div class="mt-auto flex flex-col gap-2">
+<a class="flex items-center gap-4 text-on-surface-variant px-6 py-4 transition-all duration-200 ease-in-out hover:bg-white/5 hover:text-primary" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant px-6 py-4 transition-all duration-200 ease-in-out hover:bg-white/5 hover:text-primary" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-body-md text-body-md">Help</span>
+</a>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="md:ml-80">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl bg-surface-container-low/50 shadow-none flex items-center justify-between px-container-padding h-16 md:w-[calc(100%-20rem)]">
+<button class="md:hidden text-on-surface-variant hover:text-primary transition-colors active:scale-95 transition-transform p-2">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg tracking-tighter text-primary uppercase text-center flex-grow md:text-left md:flex-grow-0">CINEPHILE</h1>
+<button class="text-on-surface-variant hover:text-primary transition-colors active:scale-95 transition-transform p-2">
+<span class="material-symbols-outlined">search</span>
+</button>
+</header>
+<!-- Grid Container -->
+<div class="pt-24 px-5 md:px-container-padding max-w-[1440px] mx-auto">
+<div class="mb-8">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-2">Discover</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Your private screening starts here.</p>
+</div>
+<!-- Bento Grid layout for Movies -->
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-gutter md:gap-stack-md">
+<!-- Movie Card 1 -->
+<article class="bg-surface-container-high rounded-lg overflow-hidden movie-card-glow transition-all duration-300 group cursor-pointer border border-white/5 relative">
+<div class="aspect-[2/3] relative overflow-hidden w-full">
+<img alt="Blade Runner 2049" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A highly detailed cinematic movie poster for a sci-fi noir film. The scene features a solitary figure standing in a neon-lit, rain-slicked futuristic city street. The lighting is dark and moody, with striking orange and teal color grading. The style is hyper-realistic, conveying a sense of vast scale and isolation, suitable for a premium dark-mode UI gallery." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzV8z9D9Ltb91OdQ1V4Mm6SkS09LCY0dQ9Gc0DIEXchcnduiPmVabTNYlmliUqFlNXYaiBQKsCGXNvhQ5yP73G7TQTQKRsnwGBE5GzG8lcindZQEM9bJ-UD2ew3BQWU4efpFrnCsvhXsn2SKMhBHVqHiQjybsqFK4yp7DRzSOWnPOP8q2iCFqyznjORlRnQ-JH_nXs9PfH8YsVtAwvUpMQ0TuTX7mYAPuPX_Td19ddmbbkBSB15xYUZJMy-Y19EOtJErbsS3F9I-es"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-80"></div>
+<div class="absolute bottom-0 left-0 p-3 w-full">
+<div class="flex items-center gap-1 text-primary-container mb-1">
+<span class="material-symbols-outlined" style="font-size: 16px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-sm text-label-sm font-bold">8.5</span>
+</div>
+</div>
+</div>
+<div class="p-3">
+<h3 class="font-label-md text-label-md text-on-surface truncate">Blade Runner 2049</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">2017</p>
+</div>
+</article>
+<!-- Movie Card 2 -->
+<article class="bg-surface-container-high rounded-lg overflow-hidden movie-card-glow transition-all duration-300 group cursor-pointer border border-white/5 relative">
+<div class="aspect-[2/3] relative overflow-hidden w-full">
+<img alt="Dune" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A highly detailed cinematic movie poster for an epic sci-fi film set on a desert planet. Featuring vast, rolling sand dunes under a harsh, glaring sun. A lone, cloaked figure walks across the immense landscape. The color palette is dominated by deep ochres, burnt oranges, and stark shadows. Minimalist, premium, and moody aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlVCbtLIdPM-cuDygMS9gf3xsGmOpdDbO9RM6fxk3JDlAxECXRNO0nY2lu0c2a7Rzntj-ZwzAYF8g9fYXSSHUvS6HJOvcp5nL2_jM9uTsLfilHPu4UWZbis0jL3S14QgZXGmYI9wnJpa7WKgFFt18DAekIjZK4s3yH-cv-w5Zmr94IqTnxWincAosFINHu_j2OJNo90qVvj8lmYKozJ5ZAF727WQZzWbgmsyQwVAmPLePKCpRgh0JR_6cOOBcmZr6vWZpu2PYmCkA_"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-80"></div>
+<div class="absolute bottom-0 left-0 p-3 w-full">
+<div class="flex items-center gap-1 text-primary-container mb-1">
+<span class="material-symbols-outlined" style="font-size: 16px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-sm text-label-sm font-bold">8.0</span>
+</div>
+</div>
+</div>
+<div class="p-3">
+<h3 class="font-label-md text-label-md text-on-surface truncate">Dune</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">2021</p>
+</div>
+</article>
+<!-- Movie Card 3 -->
+<article class="bg-surface-container-high rounded-lg overflow-hidden movie-card-glow transition-all duration-300 group cursor-pointer border border-white/5 relative">
+<div class="aspect-[2/3] relative overflow-hidden w-full">
+<img alt="The Batman" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A highly detailed cinematic movie poster for a dark, gritty superhero noir film. The image shows a silhouetted figure in a stylized tactical suit standing atop a gargoyle overlooking a rain-soaked, gothic city skyline at night. Lighting is minimal, relying on stark contrast, deep blacks, and a solitary crimson red glow from a distant signal. Moody, atmospheric, and premium." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4-ESpFGjwiM83_tNyq7G94_bneXDa18VatbTfns7pKtrMMSU_jNs6dWeA2qz4QZqd4zXejgob_aKCeegLniL8UA31D0aqE8uvnOPaJca2OIcYTYBTI2VvMQsBBide9OO8wnyLNwbvn4vO9gHL94YV7QkpyPxBn1tFa7y0AiMwxC4T3AZ4gqYZwo6IFxI7Q3x8DflwfTTGhsU5HmJVWW3Sh6Y22m9jRdwXkOZldFMpxD78-9Bm7sWce3HYRNRWGldyZX4LOSd3xGQp"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-80"></div>
+<div class="absolute bottom-0 left-0 p-3 w-full">
+<div class="flex items-center gap-1 text-primary-container mb-1">
+<span class="material-symbols-outlined" style="font-size: 16px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-sm text-label-sm font-bold">7.8</span>
+</div>
+</div>
+</div>
+<div class="p-3">
+<h3 class="font-label-md text-label-md text-on-surface truncate">The Batman</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">2022</p>
+</div>
+</article>
+<!-- Movie Card 4 -->
+<article class="bg-surface-container-high rounded-lg overflow-hidden movie-card-glow transition-all duration-300 group cursor-pointer border border-white/5 relative">
+<div class="aspect-[2/3] relative overflow-hidden w-full">
+<img alt="Fracture" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A highly detailed cinematic movie poster for a psychological thriller. A distorted, fragmented reflection of a man's face in shattered glass against a pitch-black background. Subtle glints of cold, metallic blue light catch the edges of the shards. The overall tone is unsettling, sophisticated, and dark, fitting for a minimalist, premium streaming interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_pbeq6lD8wUgOjojG23MGCY47NxQoctjFoRZp07VZgJ9ZfoqIES8GPDzoyNa97jZtCprErEu4IQCYPgWOmr2yv35vQDlxJRpfop1iTOeA88Mi5eIPR8XwvbhdQCcL0CDet4dSS2duDgozjzNYIeSTqRfyF_-vt4B_QtYhChONVpiym04WfSZpytZ6UvQ5_aIb3n3BozTSNy3etPS5lu4Q6sjWtoFE4e0DPJrzt8_ZG85_onfbLHdh-nYAbpVhHNiYYiA4N6uTCqnX"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-80"></div>
+<div class="absolute bottom-0 left-0 p-3 w-full">
+<div class="flex items-center gap-1 text-primary-container mb-1">
+<span class="material-symbols-outlined" style="font-size: 16px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-sm text-label-sm font-bold">8.2</span>
+</div>
+</div>
+</div>
+<div class="p-3">
+<h3 class="font-label-md text-label-md text-on-surface truncate">Fracture</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">2007</p>
+</div>
+</article>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 bg-background/90 backdrop-blur-2xl border-t border-white/5 shadow-2xl shadow-primary/5 fixed bottom-0 left-0 w-full flex justify-around items-center h-20 px-4 pb-safe">
+<button class="flex flex-col items-center justify-center text-primary font-bold hover:text-primary/80 active:scale-90 transition-all duration-300 w-16">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">movie</span>
+<span class="font-label-sm text-label-sm">Discover</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant/60 hover:text-primary/80 active:scale-90 transition-all duration-300 w-16">
+<span class="material-symbols-outlined mb-1">bookmark</span>
+<span class="font-label-sm text-label-sm">Watchlist</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant/60 hover:text-primary/80 active:scale-90 transition-all duration-300 w-16">
+<span class="material-symbols-outlined mb-1">group</span>
+<span class="font-label-sm text-label-sm">Social</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant/60 hover:text-primary/80 active:scale-90 transition-all duration-300 w-16">
+<span class="material-symbols-outlined mb-1">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</button>
+</nav>
+</body></html>

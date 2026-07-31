@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cinephile - Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary": "#313030",
+                      "on-primary-fixed": "#1c1b1b",
+                      "secondary-fixed-dim": "#c9c6c5",
+                      "surface-tint": "#c8c6c5",
+                      "surface-bright": "#3a3939",
+                      "tertiary-fixed": "#e6e1df",
+                      "surface-container-highest": "#353434",
+                      "tertiary-fixed-dim": "#cac6c3",
+                      "on-tertiary": "#32302f",
+                      "on-secondary": "#313030",
+                      "on-tertiary-container": "#807d7b",
+                      "on-tertiary-fixed-variant": "#484645",
+                      "inverse-surface": "#e5e2e1",
+                      "on-surface": "#e5e2e1",
+                      "tertiary": "#cac6c3",
+                      "surface-container-low": "#1c1b1b",
+                      "background": "#141313",
+                      "error": "#ffb4ab",
+                      "secondary-container": "#484646",
+                      "on-surface-variant": "#c4c7c7",
+                      "on-primary-container": "#7e7d7d",
+                      "surface": "#141313",
+                      "outline-variant": "#444748",
+                      "surface-container-lowest": "#0e0e0e",
+                      "secondary": "#c9c6c5",
+                      "on-secondary-container": "#b7b4b4",
+                      "on-error": "#690005",
+                      "secondary-fixed": "#e5e2e1",
+                      "on-error-container": "#ffdad6",
+                      "inverse-primary": "#5f5e5e",
+                      "surface-container": "#201f1f",
+                      "primary-container": "#121212",
+                      "on-primary-fixed-variant": "#474646",
+                      "on-tertiary-fixed": "#1c1b1a",
+                      "surface-dim": "#141313",
+                      "primary": "#c8c6c5",
+                      "tertiary-container": "#131211",
+                      "surface-container-high": "#2b2a2a",
+                      "primary-fixed-dim": "#c8c6c5",
+                      "on-secondary-fixed-variant": "#484646",
+                      "on-secondary-fixed": "#1c1b1b",
+                      "primary-fixed": "#e5e2e1",
+                      "error-container": "#93000a",
+                      "outline": "#8e9192",
+                      "surface-variant": "#353434",
+                      "inverse-on-surface": "#313030",
+                      "on-background": "#e5e2e1",
+                      // Custom brand colors based on prompt
+                      "brand-purple": "#8A2BE2",
+                      "brand-amber": "#FFB300"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "gutter": "16px",
+                      "stack-md": "12px",
+                      "container-padding": "24px",
+                      "section-gap": "64px",
+                      "unit": "8px",
+                      "stack-sm": "4px",
+                      "stack-lg": "24px"
+              },
+              "fontFamily": {
+                      "display-lg": [
+                              "Be Vietnam Pro"
+                      ],
+                      "body-sm": [
+                              "Be Vietnam Pro"
+                      ],
+                      "headline-lg": [
+                              "Be Vietnam Pro"
+                      ],
+                      "title-md": [
+                              "Be Vietnam Pro"
+                      ],
+                      "body-lg": [
+                              "Be Vietnam Pro"
+                      ],
+                      "headline-lg-mobile": [
+                              "Be Vietnam Pro"
+                      ],
+                      "label-caps": [
+                              "Be Vietnam Pro"
+                      ]
+              },
+              "fontSize": {
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "title-md": [
+                              "20px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "28px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "1",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        body {
+            background-color: #121212;
+            background-image: radial-gradient(circle at 50% 0%, rgba(138, 43, 226, 0.1) 0%, transparent 50%), 
+                              radial-gradient(circle at 50% 100%, rgba(255, 179, 0, 0.05) 0%, transparent 50%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .glass-panel {
+            background: rgba(30, 30, 30, 0.6);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .gradient-btn {
+            background: linear-gradient(90deg, #8A2BE2 0%, #FFB300 100%);
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .gradient-btn:hover {
+            box-shadow: 0 6px 20px rgba(255, 179, 0, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .input-field {
+            background-color: #1E1E1E;
+            border: 1px solid #2A2A2A;
+            transition: all 0.2s ease;
+        }
+
+        .input-field:focus {
+            border-color: #8A2BE2;
+            box-shadow: 0 0 0 2px rgba(138, 43, 226, 0.2);
+            outline: none;
+        }
+      </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-on-background font-body-lg antialiased">
+<!-- Top AppBar (Brand Only for Login) -->
+<header class="flex items-center justify-center px-gutter h-24 w-full z-50">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">movie_filter</span>
+<span class="font-display-lg text-title-md tracking-[0.2em] text-primary uppercase">CINEPHILE</span>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex items-center justify-center px-container-padding py-section-gap">
+<div class="w-full max-w-md glass-panel rounded-2xl p-8 md:p-12 relative overflow-hidden">
+<!-- Subtle rim light effect -->
+<div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+<!-- Hero Section -->
+<div class="text-center mb-stack-lg">
+<h1 class="font-headline-lg text-headline-lg md:text-display-lg text-on-surface mb-stack-sm">Welcome Back</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant opacity-80">Your private screening starts here.</p>
+</div>
+<!-- Login Form -->
+<form class="space-y-stack-md flex flex-col">
+<!-- Email Input -->
+<div class="relative">
+<label class="sr-only" for="email">Email Address</label>
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-on-surface-variant opacity-50">mail</span>
+</div>
+<input class="input-field w-full rounded-lg py-4 pl-12 pr-4 text-on-surface font-body-lg placeholder-on-surface-variant/50 focus:ring-0" id="email" name="email" placeholder="Email Address" required="" type="email"/>
+</div>
+<!-- Password Input -->
+<div class="relative">
+<label class="sr-only" for="password">Password</label>
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-on-surface-variant opacity-50">lock</span>
+</div>
+<input class="input-field w-full rounded-lg py-4 pl-12 pr-12 text-on-surface font-body-lg placeholder-on-surface-variant/50 focus:ring-0" id="password" name="password" placeholder="Password" required="" type="password"/>
+<button class="absolute inset-y-0 right-0 pr-4 flex items-center text-on-surface-variant hover:text-primary transition-colors" type="button">
+<span class="material-symbols-outlined opacity-70">visibility</span>
+</button>
+</div>
+<!-- Forgot Password -->
+<div class="flex justify-end pt-2">
+<a class="font-body-sm text-body-sm text-[#FFB300] hover:text-white transition-colors" href="#">Forgot Password?</a>
+</div>
+<!-- Submit Button -->
+<div class="pt-4">
+<button class="w-full gradient-btn rounded-full py-4 text-white font-title-md text-title-md flex items-center justify-center gap-2" type="submit">
+<span>Sign In</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</form>
+<!-- Footer -->
+<div class="mt-stack-lg text-center">
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                    Don't have an account? <a class="text-[#FFB300] font-semibold hover:underline decoration-2 underline-offset-4" href="#">Sign Up</a>
+</p>
+</div>
+</div>
+</main>
+<!-- Navigation shells (TopAppBar & BottomNavBar) are suppressed as this is a linear/transactional Login screen -->
+</body></html>

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Movie Detail - Dune: Part Two</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@700;800&amp;family=Inter:wght@400&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary": "#303030",
+                      "surface-container-high": "#2a2a2a",
+                      "secondary-fixed-dim": "#c6c6c7",
+                      "surface-container": "#202020",
+                      "surface": "#131313",
+                      "on-tertiary-container": "#5f5f5f",
+                      "surface-container-lowest": "#0e0e0e",
+                      "secondary-container": "#454747",
+                      "on-secondary-fixed": "#1a1c1c",
+                      "inverse-on-surface": "#303030",
+                      "on-primary-fixed-variant": "#544600",
+                      "tertiary-container": "#dcd9d9",
+                      "primary": "#fff6df",
+                      "on-error": "#690005",
+                      "surface-container-low": "#1b1b1c",
+                      "on-surface": "#e5e2e1",
+                      "error": "#ffb4ab",
+                      "on-surface-variant": "#d0c6ab",
+                      "secondary": "#c6c6c7",
+                      "primary-container": "#ffd700",
+                      "on-primary-fixed": "#221b00",
+                      "on-error-container": "#ffdad6",
+                      "outline-variant": "#4d4732",
+                      "surface-bright": "#393939",
+                      "background": "#131313",
+                      "tertiary-fixed-dim": "#c8c6c6",
+                      "on-secondary": "#2f3131",
+                      "tertiary-fixed": "#e4e2e1",
+                      "on-background": "#e5e2e1",
+                      "primary-fixed-dim": "#e9c400",
+                      "inverse-surface": "#e5e2e1",
+                      "on-secondary-container": "#b4b5b5",
+                      "inverse-primary": "#705d00",
+                      "tertiary": "#f8f6f5",
+                      "on-tertiary-fixed": "#1b1c1c",
+                      "surface-tint": "#e9c400",
+                      "on-primary-container": "#705e00",
+                      "surface-container-highest": "#353535",
+                      "error-container": "#93000a",
+                      "on-secondary-fixed-variant": "#454747",
+                      "surface-dim": "#131313",
+                      "secondary-fixed": "#e2e2e2",
+                      "primary-fixed": "#ffe16d",
+                      "on-tertiary-fixed-variant": "#474747",
+                      "outline": "#999077",
+                      "surface-variant": "#353535",
+                      "on-primary": "#3a3000"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "gutter": "16px",
+                      "stack-lg": "40px",
+                      "container-padding": "24px",
+                      "base": "8px",
+                      "stack-sm": "12px",
+                      "stack-md": "24px"
+              },
+              "fontFamily": {
+                      "label-sm": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-lg": [
+                              "Be Vietnam Pro"
+                      ],
+                      "display-lg": [
+                              "Be Vietnam Pro"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "label-md": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-md": [
+                              "Be Vietnam Pro"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "headline-lg-mobile": [
+                              "Be Vietnam Pro"
+                      ]
+              },
+              "fontSize": {
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-md": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for horizontal lists */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .poster-glow {
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.1);
+        }
+        .gold-glow {
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.15);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md antialiased overflow-x-hidden">
+<!-- Top Navigation (Task-focused page, so BottomNavBar is suppressed, but a back header is present) -->
+<header class="fixed top-0 w-full z-50 flex items-center justify-between px-container-padding h-16 w-full bg-gradient-to-b from-black/80 to-transparent backdrop-blur-sm">
+<button class="text-on-background hover:text-primary transition-colors flex items-center justify-center w-10 h-10 rounded-full bg-black/20 backdrop-blur-md border border-white/10 active:scale-95">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<button class="text-primary hover:text-primary-fixed transition-colors flex items-center justify-center w-10 h-10 rounded-full bg-black/20 backdrop-blur-md border border-white/10 active:scale-95 gold-glow">
+<span class="material-symbols-outlined" data-icon="bookmark" data-weight="fill" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+</button>
+</header>
+<main class="w-full max-w-[1440px] mx-auto pb-stack-lg">
+<!-- Hero Backdrop -->
+<section class="relative w-full h-[442px] md:h-[530px] max-h-[600px]">
+<div class="absolute inset-0 bg-cover bg-center w-full h-full opacity-60" data-alt="A breathtaking, cinematic ultra-wide shot of a vast desert landscape under a deep orange sky. Massive sand dunes roll into the distance. High contrast, noir-inspired dramatic lighting with deep black shadows. The scene feels epic, mysterious, and visually stunning, matching a premium dark UI aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBGKW9Cm8lR6jQ5_6uA01mmeUTItUit2LkFBArD-unhqJDSAEdeQwhY-FWVkTP1JKWje1Wevs2frdazROpmTu0peDsBonHy3D2RCy_xKPVzGZ8asjPHom4qE1vUoBD5aq7h4MrrZ6U6C4y7WOPBitOGdCm9dA60bWFHitcISqByvCXhXIsLi5a9hPp7VYr-2tYuGauSrvzrOhW9TJHfvsgwnIvEPhgv2qy3Zuyaz4quEcOMT-LxB-mniLkZT3Sz6j7Z0VFnHg_ELh-S')"></div>
+<!-- Gradient Overlay -->
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent"></div>
+</section>
+<!-- Movie Overview -->
+<section class="relative px-container-padding md:px-stack-lg -mt-32 md:-mt-48 flex flex-col md:flex-row gap-stack-md z-10">
+<!-- Poster -->
+<div class="flex-shrink-0 w-1/3 max-w-[200px] md:max-w-[300px] mx-auto md:mx-0">
+<div class="aspect-[2/3] rounded-lg overflow-hidden border border-white/10 poster-glow relative">
+<img class="w-full h-full object-cover" data-alt="A striking, high-contrast cinematic movie poster featuring a silhouette of a lone figure standing on a giant sand dune against a burning sun. Dark, moody atmosphere with gold and deep black tones. Premium, minimalist aesthetic suited for a luxury film tracking application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7jN9j3iJkn_ZQ2XYkJYXbUY09JqXCLB2s6EGN8kVucHAB8y2Ig9ZYm_vOGuQ0aktTWybLzCT7ItWtuHWUMCsoptIGN2yidRX30J5QL0zP541Y3Ij2Hn5jlvuaOrWvfMtnCIWNcs97gpwQDEh3xEnQXtS8YdTvh05ijWPP-RH2F292A9ey-U87Sn54YFlvQ3Afa0LnVWfQWe0mSQqGxiYFs4076i1Lh-JVi-CrRDTx3l790FlsK8n5L2VCvFwnB1I3WG_KPRYssF_6"/>
+</div>
+</div>
+<!-- Details -->
+<div class="flex flex-col justify-end pt-stack-sm md:pt-0 w-full">
+<h1 class="font-display-lg text-display-lg md:text-[64px] md:leading-[72px] text-on-background mb-base">Dune: Part Two</h1>
+<div class="flex items-center gap-base text-on-surface-variant font-label-md text-label-md mb-stack-sm flex-wrap">
+<span>2024</span>
+<span class="w-1 h-1 rounded-full bg-on-surface-variant/50"></span>
+<span>2h 46m</span>
+<span class="w-1 h-1 rounded-full bg-on-surface-variant/50"></span>
+<div class="flex gap-2">
+<span class="px-3 py-1 rounded-full border border-white/10 bg-white/5 text-on-background">Sci-Fi</span>
+<span class="px-3 py-1 rounded-full border border-white/10 bg-white/5 text-on-background">Adventure</span>
+</div>
+</div>
+<!-- Rating -->
+<div class="flex items-center gap-3 mb-stack-lg">
+<div class="flex items-center text-primary-container gold-glow">
+<span class="material-symbols-outlined text-[32px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<div>
+<div class="flex items-baseline gap-1">
+<span class="font-headline-lg text-headline-lg text-on-background">8.8</span>
+<span class="font-body-md text-body-md text-on-surface-variant">/10</span>
+</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant/80">2.4k votes</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex flex-col sm:flex-row gap-stack-sm w-full md:max-w-md">
+<button class="flex-1 bg-primary-container text-on-primary-container font-headline-md text-headline-md py-4 px-6 rounded-lg flex justify-center items-center gap-2 hover:bg-primary-fixed-dim transition-colors active:scale-95 gold-glow">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                        Add to Watchlist
+                    </button>
+<button class="flex-1 bg-transparent border-[1.5px] border-on-background text-on-background font-headline-md text-headline-md py-4 px-6 rounded-lg flex justify-center items-center gap-2 hover:bg-white/5 transition-colors active:scale-95">
+<span class="material-symbols-outlined" data-icon="check">check</span>
+                        Watched
+                    </button>
+</div>
+</div>
+</section>
+<!-- Storyline -->
+<section class="px-container-padding md:px-stack-lg mt-stack-lg">
+<h2 class="font-headline-lg text-headline-lg mb-stack-sm">Storyline</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl leading-relaxed">
+                Paul Atreides unites with Chani and the Fremen while on a warpath of revenge against the conspirators who destroyed his family. Facing a choice between the love of his life and the fate of the known universe, he endeavors to prevent a terrible future only he can foresee.
+            </p>
+</section>
+<!-- Cast -->
+<section class="mt-stack-lg pl-container-padding md:pl-stack-lg pb-stack-md">
+<h2 class="font-headline-lg text-headline-lg mb-stack-sm">Cast</h2>
+<div class="flex gap-stack-md overflow-x-auto hide-scrollbar pb-4 pr-container-padding snap-x">
+<!-- Actor 1 -->
+<div class="flex flex-col items-center gap-base w-[100px] flex-shrink-0 snap-start">
+<div class="w-20 h-20 rounded-full overflow-hidden border-2 border-surface-container-high relative">
+<img class="w-full h-full object-cover" data-alt="A moody, high-contrast portrait photo of a young male actor looking off-camera. Deep shadows, cinematic studio lighting against a dark background. Fits a premium movie application cast profile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDSlanzlTWi0ceHfERpi4zseGCsNuESb7S_wY8sXbJCReq3q-xeS_7llWxcVON84LEewY0mNTERKXVQsrW4ON--38X7rZkweu3qQNDWwmlOaYLO-QTS-aVecGe8ekO720EqXsIjmF2DezfAMzvZeveRS1XshaDIwQ0bJN6uaTFDdTA6q1BR_aRIW9Tvtc8EonUhBSz-1z0Vn3xL9xGyEHkug3icrc4AIZMYUp71VCflwE3dcgpQ47R9GLLjE42lJ8Qu_jbMZq6aOuH"/>
+</div>
+<div class="text-center">
+<p class="font-label-md text-label-md text-on-background line-clamp-1">Timothée Chalamet</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant line-clamp-1">Paul Atreides</p>
+</div>
+</div>
+<!-- Actor 2 -->
+<div class="flex flex-col items-center gap-base w-[100px] flex-shrink-0 snap-start">
+<div class="w-20 h-20 rounded-full overflow-hidden border-2 border-surface-container-high relative">
+<img class="w-full h-full object-cover" data-alt="A moody, high-contrast portrait photo of a young female actor looking intensely at the camera. Deep shadows, cinematic studio lighting against a dark background. Fits a premium movie application cast profile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBx2AiiHFk7k025gQz9u_MqSY7ZioTSuqtiYfBSBuSNCiP4Lt9BNCM3q0a9_mu_HDHVMf46GUY0GvAZzXP0dzLvS_rKF8nS-2ylVSe6fegyyAMNK2eHY1GFDGoapFk3E7_sLkw3gNGr1fCjRNY7xaLYHnCo4F3SkMulM2cSn7EkgckXmKPiTYZuwKWtNKRK-tjRc2sLis-yhpgZHE44YM-qRTpm9U9Xevm5_gSXtv9yI7-wu_vp_bsLNgXZoZe-Zia9Uk6-krYb1O9q"/>
+</div>
+<div class="text-center">
+<p class="font-label-md text-label-md text-on-background line-clamp-1">Zendaya</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant line-clamp-1">Chani</p>
+</div>
+</div>
+<!-- Actor 3 -->
+<div class="flex flex-col items-center gap-base w-[100px] flex-shrink-0 snap-start">
+<div class="w-20 h-20 rounded-full overflow-hidden border-2 border-surface-container-high relative">
+<img class="w-full h-full object-cover" data-alt="A moody, high-contrast portrait photo of a female actor with a regal presence. Deep shadows, cinematic studio lighting against a dark background. Fits a premium movie application cast profile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwktkjuZhqkj_duxXdlR4n00Vz5mC1R-c3XFC2MWmK69gcEbL8ImRW7e0GlD_y0ALRBuOLxOmKAmfI3LCUn71ZBYwZqeo8MfBZfIrC1somkTg9ZkLT9SxgpTZYAnbT1fZyu3FYjb1I37uKEEu4OSjdnDUtQ349KbM2lFsSiXojRXwk4Gwzw3rRJhDAcLsA0mXEHv4Poj5Z46U3wtkUVolN1u0hoJQXFP-B-sndWqHAVdoIgspNhf2LzJ3Un5l8YX2mhuWi-G0BF-Qz"/>
+</div>
+<div class="text-center">
+<p class="font-label-md text-label-md text-on-background line-clamp-1">Rebecca Ferguson</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant line-clamp-1">Lady Jessica</p>
+</div>
+</div>
+<!-- Actor 4 -->
+<div class="flex flex-col items-center gap-base w-[100px] flex-shrink-0 snap-start">
+<div class="w-20 h-20 rounded-full overflow-hidden border-2 border-surface-container-high relative">
+<img class="w-full h-full object-cover" data-alt="A moody, high-contrast portrait photo of a rugged male actor with facial hair. Deep shadows, cinematic studio lighting against a dark background. Fits a premium movie application cast profile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfbHF0hupNOXcTkEfhIuirgY3yN35zHwPAwr4Eiqie75ms90oRoDXttmSAZgLg6CT8tA6YjrH4Bp8-vpi5JCe-VoMNEkOzezFjBR_7cfOMJeoQFdabpne_EfPiaTgRcyOxwXGO02Zrt_P1aDJ5ZvQkEebUialNcdr8WCzPwjnAck8BsqD6bFlc4Ku4OeJx8Q4whBpriVLEq3Tw0FGrJiMZUYFZHLCaCvSzXFa-N9b7gbX-q7pYslBlhf3hfbzOi-fsN9RkpmYKLAsJ"/>
+</div>
+<div class="text-center">
+<p class="font-label-md text-label-md text-on-background line-clamp-1">Javier Bardem</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant line-clamp-1">Stilgar</p>
+</div>
+</div>
+<!-- Actor 5 -->
+<div class="flex flex-col items-center gap-base w-[100px] flex-shrink-0 snap-start">
+<div class="w-20 h-20 rounded-full overflow-hidden border-2 border-surface-container-high relative">
+<img class="w-full h-full object-cover" data-alt="A moody, high-contrast portrait photo of a young male actor looking tough. Deep shadows, cinematic studio lighting against a dark background. Fits a premium movie application cast profile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxw0LOMMTDtRRKXSbkIQQ16TEqtw3zWXu7f6WwGyXYI4jNfPNPdagmQreNmNrNlpHnqhwy9Q71LLzsnI_hj6w7GgowvaEm2kvKPEOvbMz-x_1eiENXQoHWRAdt5VlpWdMxU6BMnR-5HLoyoQEFpIty5Gc3WMB85wSLXpcmGV0IPAfBvonFo9mY37zHCoR93JBYhHZM5gsdFf5PFjdNI-v5xQYuhacNFQGeKl_c6qXLLhdyL51VteqEWRBlkZUysCNv1lGUgLK9wAnU"/>
+</div>
+<div class="text-center">
+<p class="font-label-md text-label-md text-on-background line-clamp-1">Austin Butler</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant line-clamp-1">Feyd-Rautha</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+</body></html>
