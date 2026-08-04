@@ -24,7 +24,7 @@
 //      the header updates in real-time.
 // ---------------------------------------------------------------------------
 
-import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +32,7 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../config/app_theme.dart';
 import '../../services/profile_service.dart';
+import '../auth/login_screeen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -49,8 +50,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
   late final TextEditingController _emailController;
 
   // ── Avatar state ──────────────────────────────────────────────────────────
-  /// The locally picked image file path (before upload).
-  String? _pickedImagePath;
+  /// The locally picked image bytes (works on web and mobile).
+  Uint8List? _pickedImageBytes;
 
   /// The current network URL of the user's avatar (from Firebase).
   String? _currentPhotoUrl;
@@ -275,8 +276,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
   /// Returns the appropriate image provider for the avatar.
   ImageProvider? _getAvatarImage() {
     // Prefer the locally picked image (preview before save).
-    if (_pickedImagePath != null) {
-      return FileImage(File(_pickedImagePath!));
+    if (_pickedImageBytes != null) {
+      return MemoryImage(_pickedImageBytes!);
     }
     // Fall back to the network URL from Firebase.
     if (_currentPhotoUrl != null) {
@@ -287,7 +288,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   /// Determines whether to show the placeholder icon.
   bool _shouldShowPlaceholder() {
-    return _pickedImagePath == null && _currentPhotoUrl == null;
+    return _pickedImageBytes == null && _currentPhotoUrl == null;
   }
 
   /// Opens the device gallery to pick an avatar image.
@@ -305,8 +306,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
       );
 
       if (pickedFile != null && mounted) {
+        final bytes = await pickedFile.readAsBytes();
         setState(() {
-          _pickedImagePath = pickedFile.path;
+          _pickedImageBytes = bytes;
           _errorMessage = null;
           _successMessage = null;
         });
@@ -505,8 +507,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     try {
       // Step 1: Upload avatar if a new image was picked.
       String? newPhotoUrl;
-      if (_pickedImagePath != null) {
-        newPhotoUrl = await _profileService.uploadAvatar(_pickedImagePath!);
+      if (_pickedImageBytes != null) {
+        newPhotoUrl = await _profileService.uploadAvatar(_pickedImageBytes!);
       }
 
       // Step 2: Update display name (always saved).
@@ -517,7 +519,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
       setState(() {
         _successMessage = 'Profile updated successfully!';
-        _pickedImagePath = null; // Clear picked image — now persisted.
+        _pickedImageBytes = null; // Clear picked image — now persisted.
         if (newPhotoUrl != null) _currentPhotoUrl = newPhotoUrl;
       });
     } catch (e) {
@@ -573,7 +575,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
     if (confirm == true && mounted) {
       await FirebaseAuth.instance.signOut();
       if (mounted) {
-        Navigator.of(context).popUntil((route) => route.isFirst);
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (_) => const LoginScreen()),
+          (route) => false,
+        );
       }
     }
   }

@@ -15,6 +15,7 @@
 // ---------------------------------------------------------------------------
 
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'auth_exception.dart';
@@ -62,6 +63,7 @@ class AuthService {
   Future<AuthResult> signUp({
     required String email,
     required String password,
+    String? displayName,
   }) async {
     try {
       // Attempt to create the account on Firebase.
@@ -71,8 +73,25 @@ class AuthService {
         password: password,
       );
 
+      if (displayName != null && displayName.trim().isNotEmpty) {
+        final String nickname = displayName.trim();
+        await credential.user!.updateDisplayName(nickname);
+        await credential.user!.reload();
+
+        // Ensure the user document is created with the nickname
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(credential.user!.uid)
+            .set({
+          'displayName': nickname,
+          'email': email.trim(),
+          'nickname': nickname.toLowerCase(), // Store in lowercase for case-insensitive query
+          'joinedAt': FieldValue.serverTimestamp(),
+        }, SetOptions(merge: true));
+      }
+
       // Firebase guarantees credential.user is non-null on success.
-      return AuthResult.success(credential.user!);
+      return AuthResult.success(_firebaseAuth.currentUser!);
     } on FirebaseAuthException catch (e) {
       // Map the Firebase error code to a friendly message.
       final authException = AuthException.fromCode(e.code);
@@ -103,10 +122,28 @@ class AuthService {
     required String password,
   }) async {
     try {
-      // Attempt to sign in with Firebase.
+      String loginEmail = email.trim();
+
+      // If the input doesn't contain '@', treat it as a nickname
+      if (!loginEmail.contains('@')) {
+        final String nickname = loginEmail.toLowerCase();
+        final querySnapshot = await FirebaseFirestore.instance
+            .collection('users')
+            .where('nickname', isEqualTo: nickname)
+            .limit(1)
+            .get();
+
+        if (querySnapshot.docs.isEmpty) {
+          return const AuthResult.failure('Nickname not found.');
+        }
+        
+        // Extract the actual email associated with this nickname
+        loginEmail = querySnapshot.docs.first.data()['email'] as String;
+      }
+
       final UserCredential credential =
           await _firebaseAuth.signInWithEmailAndPassword(
-        email: email.trim(),
+        email: loginEmail,
         password: password,
       );
 

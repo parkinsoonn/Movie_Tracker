@@ -75,6 +75,9 @@ class Movie {
       genreIds: (json['genre_ids'] as List<dynamic>?)
               ?.map((e) => e as int)
               .toList() ??
+          (json['genres'] as List<dynamic>?)
+              ?.map((e) => (e['id'] as num).toInt())
+              .toList() ??
           const <int>[],
     );
   }

@@ -542,13 +542,13 @@ class _MovieCommentsState extends State<MovieComments> {
                       const Icon(
                         Icons.star_rounded,
                         size: 14,
-                        color: CinephileTheme.primaryContainer,
+                        color: CinephileTheme.starColor,
                       ),
                       const SizedBox(width: 4),
                       Text(
                         comment.formattedRating,
                         style: CinephileTheme.labelSm(
-                          color: CinephileTheme.primaryContainer,
+                          color: CinephileTheme.starColor,
                         ).copyWith(fontWeight: FontWeight.bold, fontSize: 11),
                       ),
                     ],

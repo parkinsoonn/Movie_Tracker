@@ -68,7 +68,7 @@ class WatchedToggleButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(CinephileTheme.radiusMd),
         border: isWatched
             ? null
-            : Border.all(color: CinephileTheme.onSurface, width: 1.5),
+            : Border.all(color: CinephileTheme.onSurface, width: 1.0),
         boxShadow: isWatched
             ? [
                 BoxShadow(
@@ -99,7 +99,7 @@ class WatchedToggleButton extends StatelessWidget {
             key: ValueKey(isWatched),
             style: CinephileTheme.headlineMd(
               color: isWatched ? Colors.white : CinephileTheme.onSurface,
-            ).copyWith(fontSize: 16),
+            ).copyWith(fontSize: 14),
           ),
         ),
       ),

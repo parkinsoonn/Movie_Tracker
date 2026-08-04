@@ -9,6 +9,7 @@
 //   • Purple→Amber gradient "Sign In" button
 //   • "Be Vietnam Pro" headlines, gold accent links
 //   • Full Firebase AuthService integration
+//   • Forgot Password flow with Firebase password reset
 // ---------------------------------------------------------------------------
 
 import 'package:flutter/material.dart';
@@ -74,6 +75,271 @@ class _LoginScreenState extends State<LoginScreen> {
         );
       }
     }
+  }
+
+  // ── Forgot Password Handler ───────────────────────────────────────────────
+
+  /// Handles the "Forgot Password" flow.
+  ///
+  /// If the email field already has a value, sends the reset email directly.
+  /// If the email field is empty, shows a themed dialog to collect the email
+  /// address first.
+  Future<void> _handleForgotPassword() async {
+    final email = _emailController.text.trim();
+
+    if (email.isNotEmpty) {
+      // Email field is filled — send reset directly.
+      await _sendPasswordResetEmail(email);
+    } else {
+      // Email field is empty — show a dialog to collect it.
+      _showForgotPasswordDialog();
+    }
+  }
+
+  /// Sends a Firebase password-reset email and shows appropriate feedback.
+  Future<void> _sendPasswordResetEmail(String email) async {
+    final error = await _authService.sendPasswordResetEmail(email: email);
+
+    if (!mounted) return;
+
+    if (error == null) {
+      // Success
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Row(
+            children: [
+              Icon(Icons.check_circle, color: Colors.white, size: 20),
+              SizedBox(width: 12),
+              Expanded(
+                child: Text('Password reset email sent! Check your inbox.'),
+              ),
+            ],
+          ),
+          backgroundColor: const Color(0xFF4CAF50),
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          margin: const EdgeInsets.all(16),
+        ),
+      );
+    } else {
+      // Failure
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Row(
+            children: [
+              const Icon(Icons.error_outline, color: Colors.white, size: 20),
+              const SizedBox(width: 12),
+              Expanded(child: Text(error)),
+            ],
+          ),
+          backgroundColor: Colors.redAccent,
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          margin: const EdgeInsets.all(16),
+        ),
+      );
+    }
+  }
+
+  /// Shows a themed dialog to collect the user's email address for password
+  /// reset when the login email field is empty.
+  void _showForgotPasswordDialog() {
+    final dialogEmailController = TextEditingController();
+
+    showDialog(
+      context: context,
+      barrierColor: Colors.black.withAlpha(180),
+      builder: (dialogContext) {
+        return Dialog(
+          backgroundColor: Colors.transparent,
+          child: Container(
+            padding: const EdgeInsets.all(
+              CinephileTheme.spacingContainerPadding,
+            ),
+            decoration: BoxDecoration(
+              color: const Color(0xFF1E1E1E).withAlpha(230),
+              borderRadius: BorderRadius.circular(
+                CinephileTheme.radiusXxl,
+              ),
+              border: Border.all(
+                color: Colors.white.withAlpha(13),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withAlpha(128),
+                  blurRadius: 50,
+                  offset: const Offset(0, 25),
+                ),
+              ],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Rim-light
+                Container(
+                  height: 1,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.transparent,
+                        Colors.white.withAlpha(51),
+                        Colors.transparent,
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+
+                // Icon
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: CinephileTheme.brandAmber.withAlpha(20),
+                  ),
+                  child: const Icon(
+                    Icons.lock_reset,
+                    color: CinephileTheme.brandAmber,
+                    size: 32,
+                  ),
+                ),
+                const SizedBox(height: 20),
+
+                // Title
+                Text(
+                  'Reset Password',
+                  style: CinephileTheme.headlineLg(
+                    color: CinephileTheme.onSurface,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'Enter your email address and we\'ll send you a link to reset your password.',
+                  textAlign: TextAlign.center,
+                  style: CinephileTheme.bodyMd(
+                    color: CinephileTheme.onSurfaceVariant,
+                  ),
+                ),
+                const SizedBox(height: 24),
+
+                // Email field
+                TextField(
+                  controller: dialogEmailController,
+                  keyboardType: TextInputType.emailAddress,
+                  style: CinephileTheme.bodyMd(
+                    color: CinephileTheme.onSurface,
+                  ),
+                  decoration: InputDecoration(
+                    hintText: 'Email Address',
+                    hintStyle: CinephileTheme.bodyMd(
+                      color: CinephileTheme.onSurfaceVariant.withAlpha(128),
+                    ),
+                    prefixIcon: Icon(
+                      Icons.email_outlined,
+                      color: CinephileTheme.onSurfaceVariant.withAlpha(128),
+                    ),
+                    filled: true,
+                    fillColor: const Color(0xFF1E1E1E),
+                    contentPadding: const EdgeInsets.symmetric(
+                      vertical: 18,
+                      horizontal: 16,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(
+                        CinephileTheme.radiusLg,
+                      ),
+                      borderSide: const BorderSide(
+                        color: Color(0xFF2A2A2A),
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(
+                        CinephileTheme.radiusLg,
+                      ),
+                      borderSide: const BorderSide(
+                        color: Color(0xFF2A2A2A),
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(
+                        CinephileTheme.radiusLg,
+                      ),
+                      borderSide: const BorderSide(
+                        color: CinephileTheme.brandAmber,
+                        width: 1.5,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 24),
+
+                // Buttons
+                Row(
+                  children: [
+                    // Cancel
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () => Navigator.pop(dialogContext),
+                        child: Text(
+                          'Cancel',
+                          style: CinephileTheme.headlineMd(
+                            color: CinephileTheme.onSurfaceVariant,
+                          ).copyWith(fontSize: 14),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    // Send
+                    Expanded(
+                      child: Container(
+                        height: 48,
+                        decoration: BoxDecoration(
+                          gradient: CinephileTheme.ctaGradient,
+                          borderRadius: BorderRadius.circular(24),
+                        ),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            final dialogEmail =
+                                dialogEmailController.text.trim();
+                            if (dialogEmail.isEmpty) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Please enter your email.'),
+                                ),
+                              );
+                              return;
+                            }
+                            Navigator.pop(dialogContext);
+                            _sendPasswordResetEmail(dialogEmail);
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.transparent,
+                            shadowColor: Colors.transparent,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(24),
+                            ),
+                          ),
+                          child: Text(
+                            'Send Link',
+                            style: CinephileTheme.headlineMd(
+                              color: Colors.white,
+                            ).copyWith(fontSize: 14),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    ).then((_) => dialogEmailController.dispose());
   }
 
   @override
@@ -214,11 +480,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
                         const SizedBox(height: 32),
 
-                        // Email field
+                        // Email or Nickname field
                         _buildInputField(
                           controller: _emailController,
-                          hint: 'Email Address',
-                          icon: Icons.email_outlined,
+                          hint: 'Email or Nickname',
+                          icon: Icons.person_outline,
                         ),
                         const SizedBox(height: CinephileTheme.spacingStackSm),
 
@@ -236,7 +502,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Align(
                           alignment: Alignment.centerRight,
                           child: TextButton(
-                            onPressed: () {},
+                            onPressed: _handleForgotPassword,
                             child: Text(
                               'Forgot Password?',
                               style: CinephileTheme.bodyMd(

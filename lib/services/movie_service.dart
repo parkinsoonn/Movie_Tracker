@@ -113,6 +113,36 @@ class MovieService {
     return _parseMovieList(body);
   }
 
+  /// Searches for movies matching the given [query] string using TMDb's
+  /// `/search/movie` endpoint.
+  ///
+  /// * [query] — the user's search text (minimum 1 character).
+  /// * [page] — page number for pagination (1-indexed).
+  ///
+  /// Returns a `List<Movie>` of matching results. Returns an empty list
+  /// when no results are found.
+  ///
+  /// Throws a subtype of [ApiException] on failure.
+  Future<List<Movie>> searchMovies({
+    required String query,
+    int page = ApiConfig.defaultPage,
+    String language = ApiConfig.defaultLanguage,
+  }) async {
+    if (query.trim().isEmpty) return [];
+
+    final uri = Uri.parse('${ApiConfig.baseUrl}/search/movie').replace(
+      queryParameters: {
+        'api_key': ApiConfig.apiKey,
+        'language': language,
+        'page': page.toString(),
+        'query': query.trim(),
+      },
+    );
+
+    final Map<String, dynamic> body = await _get(uri);
+    return _parseMovieList(body);
+  }
+
   // ── Private Helpers ───────────────────────────────────────────────────────
 
   /// Fetches complete details for a single movie by its TMDb ID.

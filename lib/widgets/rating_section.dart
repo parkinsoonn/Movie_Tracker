@@ -19,6 +19,7 @@ import 'package:flutter/material.dart';
 import '../config/app_theme.dart';
 import '../models/movie.dart';
 import '../models/rated_movie.dart';
+import '../models/watched_movie.dart';
 import '../services/profile_service.dart';
 
 class RatingSection extends StatelessWidget {
@@ -119,35 +120,35 @@ class _RatingSectionContentState extends State<_RatingSectionContent>
             children: [
               Icon(
                 isRated ? Icons.star_rounded : Icons.star_outline_rounded,
-                size: 20,
-                color: CinephileTheme.primaryContainer,
+                size: 16,
+                color: CinephileTheme.starColor,
               ),
               const SizedBox(width: 8),
               Text(
                 'Your Rating',
                 style: CinephileTheme.headlineMd(
                   color: CinephileTheme.onSurface,
-                ).copyWith(fontSize: 16),
+                ).copyWith(fontSize: 14),
               ),
               const Spacer(),
               // Rating value badge (visible when rated)
               if (isRated)
                 Container(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                   decoration: BoxDecoration(
-                    color: CinephileTheme.primaryContainer.withAlpha(25),
+                    color: CinephileTheme.starColor.withAlpha(25),
                     borderRadius:
                         BorderRadius.circular(CinephileTheme.radiusMd),
                     border: Border.all(
-                      color: CinephileTheme.primaryContainer.withAlpha(60),
+                      color: CinephileTheme.starColor.withAlpha(60),
                     ),
                   ),
                   child: Text(
                     '${widget.currentRating!.toStringAsFixed(1)} / 10',
                     style: CinephileTheme.labelMd(
-                      color: CinephileTheme.primaryContainer,
-                    ).copyWith(fontSize: 12, fontWeight: FontWeight.bold),
+                      color: CinephileTheme.starColor,
+                    ).copyWith(fontSize: 11, fontWeight: FontWeight.bold),
                   ),
                 ),
             ],
@@ -206,7 +207,7 @@ class _RatingSectionContentState extends State<_RatingSectionContent>
     return GestureDetector(
       onTapDown: (details) {
         // Determine which half of the star was tapped.
-        final starWidth = 44.0; // matches the SizedBox width below
+        final starWidth = 32.0; // matches the SizedBox width below
         final isLeftHalf = details.localPosition.dx < starWidth / 2;
         final tappedRating = isLeftHalf
             ? (index * 2) + 1.0
@@ -223,14 +224,14 @@ class _RatingSectionContentState extends State<_RatingSectionContent>
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 4),
         child: SizedBox(
-          width: 44,
-          height: 44,
+          width: 32,
+          height: 32,
           child: Stack(
             children: [
               // Background (empty) star
               Icon(
                 Icons.star_rounded,
-                size: 44,
+                size: 32,
                 color: CinephileTheme.surfaceContainer,
               ),
               // Filled portion — clipped to show half or full
@@ -238,8 +239,8 @@ class _RatingSectionContentState extends State<_RatingSectionContent>
                 clipper: _StarClipper(fillFraction),
                 child: Icon(
                   Icons.star_rounded,
-                  size: 44,
-                  color: CinephileTheme.primaryContainer,
+                  size: 32,
+                  color: CinephileTheme.starColor,
                 ),
               ),
             ],
@@ -272,6 +273,17 @@ class _RatingSectionContentState extends State<_RatingSectionContent>
       ratedAt: DateTime.now(),
     );
     widget.service.addRatedMovie(rated).then((_) {
+      // Automatically mark the movie as watched when rated.
+      // Uses the movieId as document ID — idempotent write, safe to call
+      // even if the movie is already in the watched list.
+      final watched = WatchedMovie(
+        movieId: widget.movie.id,
+        title: widget.movie.title,
+        posterPath: widget.movie.posterPath,
+        addedAt: DateTime.now(),
+      );
+      widget.service.addWatchedMovie(watched);
+
       // Clear preview once Firestore confirms (stream takes over).
       if (mounted) setState(() => _previewRating = null);
     });

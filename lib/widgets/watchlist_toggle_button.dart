@@ -85,7 +85,21 @@ class WatchlistToggleButton extends StatelessWidget {
             : null,
       ),
       child: ElevatedButton.icon(
-        onPressed: () => _service.toggleWatchlist(movie),
+        onPressed: () async {
+          try {
+            await _service.toggleWatchlist(movie);
+          } catch (e) {
+            if (context.mounted) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Cannot add: Already watched or rated!', style: TextStyle(color: Colors.white)),
+                  backgroundColor: CinephileTheme.error,
+                  duration: Duration(seconds: 2),
+                ),
+              );
+            }
+          }
+        },
         icon: AnimatedSwitcher(
           duration: const Duration(milliseconds: 250),
           transitionBuilder: (child, animation) => ScaleTransition(
@@ -155,7 +169,21 @@ class WatchlistToggleButton extends StatelessWidget {
                 : CinephileTheme.primary,
           ),
         ),
-        onPressed: () => _service.toggleWatchlist(movie),
+        onPressed: () async {
+          try {
+            await _service.toggleWatchlist(movie);
+          } catch (e) {
+            if (context.mounted) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Cannot add: Already watched or rated!', style: TextStyle(color: Colors.white)),
+                  backgroundColor: CinephileTheme.error,
+                  duration: Duration(seconds: 2),
+                ),
+              );
+            }
+          }
+        },
       ),
     );
   }

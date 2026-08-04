@@ -224,7 +224,7 @@ class MovieDetailScreen extends StatelessWidget {
                         ),
                         child: const Icon(
                           Icons.star,
-                          color: CinephileTheme.primaryContainer,
+                          color: CinephileTheme.starColor,
                           size: 32,
                         ),
                       ),

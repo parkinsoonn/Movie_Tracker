@@ -284,48 +284,36 @@ class _ProfileScreenState extends State<ProfileScreen>
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         // Watched count
-        StreamBuilder<List<WatchedMovie>>(
-          stream: _profileService.getWatchedMoviesStream(),
-          builder: (context, snap) {
-            final count = snap.data?.length ?? 0;
-            return _statPill(
-              icon: Icons.visibility,
-              value: '$count',
-              label: 'Watched',
-            );
-          },
+        Expanded(
+          child: StreamBuilder<List<WatchedMovie>>(
+            stream: _profileService.getWatchedMoviesStream(),
+            builder: (context, snap) {
+              final count = snap.data?.length ?? 0;
+              return _statPill(
+                icon: Icons.visibility,
+                value: '$count',
+                label: 'Watched',
+                iconColor: CinephileTheme.primary,
+              );
+            },
+          ),
         ),
-        const SizedBox(width: 12),
+        const SizedBox(width: CinephileTheme.spacingGutter),
 
         // Rated count
-        StreamBuilder<List<RatedMovie>>(
-          stream: _profileService.getRatedMoviesStream(),
-          builder: (context, snap) {
-            final movies = snap.data ?? [];
-            return _statPill(
-              icon: Icons.star_rounded,
-              value: '${movies.length}',
-              label: 'Rated',
-            );
-          },
-        ),
-        const SizedBox(width: 12),
-
-        // Average rating
-        StreamBuilder<List<RatedMovie>>(
-          stream: _profileService.getRatedMoviesStream(),
-          builder: (context, snap) {
-            final movies = snap.data ?? [];
-            final avg = movies.isEmpty
-                ? 0.0
-                : movies.map((m) => m.rating).reduce((a, b) => a + b) /
-                    movies.length;
-            return _statPill(
-              icon: Icons.analytics_outlined,
-              value: avg.toStringAsFixed(1),
-              label: 'Avg Rating',
-            );
-          },
+        Expanded(
+          child: StreamBuilder<List<RatedMovie>>(
+            stream: _profileService.getRatedMoviesStream(),
+            builder: (context, snap) {
+              final movies = snap.data ?? [];
+              return _statPill(
+                icon: Icons.rate_review,
+                value: '${movies.length}',
+                label: 'Rated',
+                iconColor: CinephileTheme.tertiary,
+              );
+            },
+          ),
         ),
       ],
     );
@@ -336,32 +324,42 @@ class _ProfileScreenState extends State<ProfileScreen>
     required IconData icon,
     required String value,
     required String label,
+    Color? iconColor,
   }) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      padding: const EdgeInsets.symmetric(
+          horizontal: 8, vertical: 12),
       decoration: BoxDecoration(
-        color: CinephileTheme.surfaceContainerHigh.withAlpha(180),
-        borderRadius: BorderRadius.circular(CinephileTheme.radiusLg),
+        color: CinephileTheme.surfaceContainerHigh,
+        borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: CinephileTheme.outlineVariant.withAlpha(80),
+          color: Colors.white.withAlpha(25),
         ),
       ),
       child: Column(
         children: [
-          Icon(icon, size: 20, color: CinephileTheme.primaryContainer),
+          Container(
+            width: 32,
+            height: 32,
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              color: CinephileTheme.surfaceContainerLow,
+            ),
+            child: Icon(icon, size: 16, color: iconColor ?? CinephileTheme.primary),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            label.toUpperCase(),
+            style: CinephileTheme.labelSm(
+              color: CinephileTheme.onSurfaceVariant,
+            ).copyWith(letterSpacing: 1.2, fontSize: 10),
+          ),
           const SizedBox(height: 4),
           Text(
             value,
-            style: CinephileTheme.headlineMd(
+            style: CinephileTheme.displayLg(
               color: CinephileTheme.onSurface,
-            ).copyWith(fontSize: 18),
-          ),
-          const SizedBox(height: 2),
-          Text(
-            label,
-            style: CinephileTheme.labelSm(
-              color: CinephileTheme.onSurfaceVariant,
-            ).copyWith(fontSize: 10),
+            ).copyWith(fontSize: 24),
           ),
         ],
       ),
@@ -672,13 +670,13 @@ class _ProfileScreenState extends State<ProfileScreen>
                     const Icon(
                       Icons.star_rounded,
                       size: 18,
-                      color: CinephileTheme.primaryContainer,
+                      color: CinephileTheme.starColor,
                     ),
                     const SizedBox(width: 4),
                     Text(
                       movie.formattedRating,
                       style: CinephileTheme.labelMd(
-                        color: CinephileTheme.primaryContainer,
+                        color: CinephileTheme.starColor,
                       ).copyWith(fontSize: 13, fontWeight: FontWeight.bold),
                     ),
                   ],

@@ -15,7 +15,7 @@
 //     updates both Firebase Auth and Firestore for consistency.
 // ---------------------------------------------------------------------------
 
-import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -75,9 +75,11 @@ class ProfileService {
     final user = _auth.currentUser;
     if (user == null) return;
 
+    final displayName = user.displayName ?? user.email?.split('@').first ?? 'Cinephile';
     await _firestore.collection('users').doc(user.uid).set({
-      'displayName': user.displayName ?? user.email?.split('@').first ?? 'Cinephile',
+      'displayName': displayName,
       'email': user.email ?? '',
+      'nickname': displayName.toLowerCase(),
       'photoUrl': user.photoURL,
       'joinedAt': FieldValue.serverTimestamp(),
     }, SetOptions(merge: true));
@@ -107,7 +109,10 @@ class ProfileService {
 
     // Step 2: Mirror changes to the Firestore user document.
     final Map<String, dynamic> updates = {};
-    if (displayName != null) updates['displayName'] = displayName;
+    if (displayName != null) {
+      updates['displayName'] = displayName;
+      updates['nickname'] = displayName.toLowerCase();
+    }
     if (photoUrl != null) updates['photoUrl'] = photoUrl;
 
     if (updates.isNotEmpty) {
@@ -119,13 +124,12 @@ class ProfileService {
   /// profile photo across both Auth and Firestore.
   ///
   /// Upload flow:
-  ///   1. Read the image file from the provided [filePath].
-  ///   2. Upload to `avatars/{uid}.jpg` in Firebase Storage.
-  ///   3. Retrieve the public download URL.
-  ///   4. Call [updateUserProfile] to persist the URL in Auth + Firestore.
+  ///   1. Upload the provided [imageBytes] to `avatars/{uid}.jpg` in Firebase Storage.
+  ///   2. Retrieve the public download URL.
+  ///   3. Call [updateUserProfile] to persist the URL in Auth + Firestore.
   ///
   /// Returns the download URL of the uploaded avatar.
-  Future<String> uploadAvatar(String filePath) async {
+  Future<String> uploadAvatar(Uint8List imageBytes) async {
     final user = _auth.currentUser;
     if (user == null) throw StateError('No authenticated user.');
 
@@ -133,9 +137,14 @@ class ProfileService {
     final ref = _storage.ref().child('avatars/${user.uid}.jpg');
 
     // Upload the file with JPEG content type for proper CDN serving.
-    await ref.putFile(
-      File(filePath),
+    // Added a 15-second timeout because Firebase Storage can silently hang on web
+    // if CORS is not configured or the Storage bucket isn't initialized.
+    await ref.putData(
+      imageBytes,
       SettableMetadata(contentType: 'image/jpeg'),
+    ).timeout(
+      const Duration(seconds: 15),
+      onTimeout: () => throw Exception('Upload timed out. Please check if Firebase Storage is enabled and CORS is configured.'),
     );
 
     // Get the public download URL from Firebase Storage.

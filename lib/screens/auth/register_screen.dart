@@ -59,6 +59,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     final result = await _authService.signUp(
       email: _emailController.text.trim(),
       password: _passwordController.text.trim(),
+      displayName: _nameController.text.trim(),
     );
 
     setState(() => _isLoading = false);
@@ -250,9 +251,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                             _buildLabeledInput(
                               controller: _nameController,
-                              label: 'FULL NAME',
-                              hint: 'John Doe',
-                              icon: Icons.person_outlined,
+                              label: 'NICKNAME',
+                              hint: 'cinephile123',
+                              icon: Icons.alternate_email,
                             ),
                             const SizedBox(height: CinephileTheme.spacingStackMd),
 

@@ -92,14 +92,14 @@ class MovieCard extends StatelessWidget {
                       children: [
                         const Icon(
                           Icons.star,
-                          color: CinephileTheme.primaryContainer,
+                          color: CinephileTheme.starColor,
                           size: 16,
                         ),
                         const SizedBox(width: 4),
                         Text(
                           movie.voteAverage.toStringAsFixed(1),
                           style: CinephileTheme.labelSm(
-                            color: CinephileTheme.primaryContainer,
+                            color: CinephileTheme.starColor,
                           ).copyWith(fontWeight: FontWeight.bold),
                         ),
                       ],

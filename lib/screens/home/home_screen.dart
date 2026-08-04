@@ -26,6 +26,7 @@ import '../../services/watchlist_service.dart';
 import '../../widgets/movie_card.dart';
 import '../profile/profile_screen.dart';
 import '../watchlist/watchlist_screen.dart';
+import 'search_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -96,16 +97,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
       // ── App Bar ────────────────────────────────────────────────────────────
       // Hidden when Watchlist or Profile tab is active (they have their own AppBars).
-      appBar: (_currentNavIndex == 1 || _currentNavIndex == 2)
+      appBar: (_currentNavIndex == 1 || _currentNavIndex == 2 || _currentNavIndex == 3)
           ? null
           : AppBar(
         backgroundColor: CinephileTheme.background.withAlpha(204), // ~80%
         elevation: 0,
         scrolledUnderElevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.menu, color: CinephileTheme.onSurfaceVariant),
-          onPressed: () {},
-        ),
+        automaticallyImplyLeading: false,
         centerTitle: true,
         title: Row(
           mainAxisSize: MainAxisSize.min,
@@ -124,68 +122,96 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.search,
-              color: CinephileTheme.onSurfaceVariant,
-            ),
-            onPressed: () {},
-          ),
-        ],
       ),
 
       // ── Body ──────────────────────────────────────────────────────────────
-      // Show dedicated screens for Watchlist (1) and Profile (2);
-      // Discover feed is the default for all other tabs.
       body: _currentNavIndex == 1
-          ? WatchlistScreen(
-              onDiscoverTap: () => setState(() => _currentNavIndex = 0),
-            )
+          ? const SearchScreen()
           : _currentNavIndex == 2
-              ? const ProfileScreen()
-              : _buildDiscoverBody(),
+              ? WatchlistScreen(
+                  onDiscoverTap: () => setState(() => _currentNavIndex = 0),
+                )
+              : _currentNavIndex == 3
+                  ? const ProfileScreen()
+                  : _buildDiscoverBody(),
 
       // ── Bottom Navigation ─────────────────────────────────────────────────
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          color: CinephileTheme.background.withAlpha(230),
-          border: Border(
-            top: BorderSide(
-              color: Colors.white.withAlpha(13),
-            ),
-          ),
+      bottomNavigationBar: _buildCustomBottomNav(),
+    );
+  }
+
+  Widget _buildCustomBottomNav() {
+    return Container(
+      decoration: BoxDecoration(
+        color: CinephileTheme.surfaceContainer.withAlpha(204),
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+        border: Border(
+          top: BorderSide(color: Colors.white.withAlpha(25)),
         ),
-        child: BottomNavigationBar(
-          currentIndex: _currentNavIndex,
-          onTap: (i) => setState(() => _currentNavIndex = i),
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          selectedItemColor: CinephileTheme.primary,
-          unselectedItemColor: CinephileTheme.onSurfaceVariant.withAlpha(153),
-          type: BottomNavigationBarType.fixed,
-          selectedLabelStyle: CinephileTheme.labelSm(),
-          unselectedLabelStyle: CinephileTheme.labelSm(),
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.movie_outlined),
-              activeIcon: Icon(Icons.movie),
-              label: 'Discover',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.bookmark_outline),
-              activeIcon: Icon(Icons.bookmark),
-              label: 'Watchlist',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person_outline),
-              activeIcon: Icon(Icons.person),
-              label: 'Profile',
-            ),
-          ],
+      ),
+      child: SafeArea(
+        top: false,
+        child: Container(
+          height: 64,
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _buildNavItem(0, Icons.home_outlined, Icons.home, 'Home'),
+              _buildNavItem(1, Icons.search, Icons.search, 'Search'),
+              _buildNavItem(2, Icons.bookmark_outline, Icons.bookmark, 'Watchlist'),
+              _buildNavItem(3, Icons.person_outline, Icons.person, 'Profile'),
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  Widget _buildNavItem(int index, IconData icon, IconData activeIcon, String label) {
+    final isSelected = _currentNavIndex == index;
+    if (isSelected) {
+      return GestureDetector(
+        onTap: () => setState(() => _currentNavIndex = index),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+          decoration: BoxDecoration(
+            color: CinephileTheme.primaryContainer,
+            borderRadius: BorderRadius.circular(32),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(activeIcon, color: CinephileTheme.onPrimaryContainer, size: 24),
+              const SizedBox(height: 2),
+              Text(
+                label,
+                style: CinephileTheme.labelSm(color: CinephileTheme.onPrimaryContainer).copyWith(fontSize: 10),
+              ),
+            ],
+          ),
+        ),
+      );
+    } else {
+      return GestureDetector(
+        onTap: () => setState(() => _currentNavIndex = index),
+        behavior: HitTestBehavior.opaque,
+        child: SizedBox(
+          width: 64,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(icon, color: CinephileTheme.onSurfaceVariant, size: 24),
+              const SizedBox(height: 2),
+              Text(
+                label,
+                style: CinephileTheme.labelSm(color: CinephileTheme.onSurfaceVariant).copyWith(fontSize: 10),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
   }
 
   // ═══════════════════════════════════════════════════════════════════════════

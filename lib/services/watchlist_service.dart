@@ -149,6 +149,16 @@ class WatchlistService {
     if (doc.exists) {
       await docRef.delete();
     } else {
+      final uid = _auth.currentUser?.uid;
+      if (uid == null) throw StateError('No authenticated user.');
+      final userDoc = _firestore.collection('users').doc(uid);
+      final watchedDoc = await userDoc.collection('watched_movies').doc(movie.id.toString()).get();
+      final ratedDoc = await userDoc.collection('rated_movies').doc(movie.id.toString()).get();
+
+      if (watchedDoc.exists || ratedDoc.exists) {
+        throw Exception('Already watched or rated');
+      }
+
       final watchlistMovie = WatchlistMovie(
         movieId: movie.id,
         title: movie.title,
